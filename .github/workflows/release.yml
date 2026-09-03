@@ -25,6 +25,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check private source credential
+        shell: bash
+        env:
+          SOURCE_DEPLOY_KEY: ${{ secrets.SOURCE_DEPLOY_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "$SOURCE_DEPLOY_KEY" ]; then
+            echo "::error::Missing SOURCE_DEPLOY_KEY repository secret. Add the private deploy key for canxin121/ColorOSDepthMask-Source."
+            exit 1
+          fi
+
       - name: Checkout release repository
         uses: actions/checkout@v4
 
