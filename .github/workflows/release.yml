@@ -44,25 +44,13 @@ jobs:
           cache: gradle
           cache-dependency-path: source/**/*.gradle*
 
-      - name: Restore release signing key
-        shell: bash
-        env:
-          SIGNING_KEYSTORE_BASE64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
-        run: |
-          set -euo pipefail
-          printf '%s' "$SIGNING_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/depthmask-release.jks"
-          chmod 600 "$RUNNER_TEMP/depthmask-release.jks"
-
       - name: Build release APK
         working-directory: source
-        env:
-          DEPTHMASK_KEYSTORE_PATH: ${{ runner.temp }}/depthmask-release.jks
-          DEPTHMASK_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          DEPTHMASK_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-          DEPTHMASK_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
         run: |
           set -euo pipefail
           chmod +x gradlew
+          test -f signing/release.jks
+          test -f signing/release.properties
           ./gradlew :app:assembleRelease --no-daemon --stacktrace
 
       - name: Validate artifact
