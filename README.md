@@ -43,7 +43,7 @@ ColorOS 16 锁屏景深壁纸增强模块。
 
 DepthMask 使用 `libsu` 主动建立 root shell，因此 Magisk / APatch 等环境通常会在首次使用时弹出授权请求。
 
-KernelSU / KernelSU Next 采用以 Root 管理器为准的白名单授权模型时，管理器可能不会弹出传统授权对话框。若 App 显示 **Root 未授权**，请在对应 Root 管理器里允许 DepthMask，然后回到 App 点击 **重新请求**。
+KernelSU / KernelSU Next 采用以 Root 管理器为准的白名单授权模型时，管理器可能不会弹出传统授权对话框。若 App 显示 **Root 未授权**，可直接点击 Root 卡片里检测到的管理器名称打开 Root 管理器，允许 DepthMask 后回到 App 点击 **重新请求**。
 
 ## 使用蒙版
 
