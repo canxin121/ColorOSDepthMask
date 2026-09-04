@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag, for example v1.0.0
+        description: Release tag, for example v0.1.0
         required: true
-        default: v1.0.0
+        default: v0.1.0
       source_ref:
         description: Private source branch, tag or commit
         required: true
@@ -85,6 +85,15 @@ jobs:
           APK='source/app/build/outputs/apk/release/app-release.apk'
           test -f "$APK"
           test "$(unzip -p "$APK" assets/xposed_init | tr -d '\r\n')" = 'dev.coloros.depthmask.hook.DepthMaskHook'
+          AAPT="$ANDROID_HOME/build-tools/37.0.0/aapt"
+          VERSION_NAME="$($AAPT dump badging "$APK" | sed -n "s/.*versionName='\([^']*\)'.*/\1/p" | head -n 1)"
+          EXPECTED_VERSION="${{ inputs.tag }}"
+          EXPECTED_VERSION="${EXPECTED_VERSION#v}"
+          test -n "$VERSION_NAME"
+          if [ "$VERSION_NAME" != "$EXPECTED_VERSION" ]; then
+            echo "::error::APK versionName $VERSION_NAME does not match release tag ${{ inputs.tag }}"
+            exit 1
+          fi
           NAME="ColorOSDepthMask-${{ inputs.tag }}.apk"
           cp "$APK" "$NAME"
           sha256sum "$NAME"
