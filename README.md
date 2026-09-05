@@ -4,6 +4,25 @@ ColorOSDepthMask 是一个用于 **ColorOS 锁屏景深壁纸** 的 LSPosed 模�
 
 它可以让你自己控制景深蒙版，不再只能依赖系统 AI 自动抠图。
 
+## 实际界面
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <a href="screenshots/lockscreen-editor.jpg"><img src="screenshots/lockscreen-editor.jpg" alt="ColorOS 锁屏编辑页中的蒙版入口" width="260"></a><br>
+      <sub>锁屏编辑页：在原生「景深」旁加入「蒙版」入口</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="screenshots/mask-panel.jpg"><img src="screenshots/mask-panel.jpg" alt="ColorOSDepthMask 蒙版功能面板" width="260"></a><br>
+      <sub>蒙版面板：自动生成、编辑、导入，以及替换 / 并集 / 交集 / 反转</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="screenshots/mask-editor.jpg"><img src="screenshots/mask-editor.jpg" alt="ColorOSDepthMask 蒙版编辑器" width="260"></a><br>
+      <sub>蒙版编辑器：直接在真实壁纸上使用画笔、橡皮、撤销和重做</sub>
+    </td>
+  </tr>
+</table>
+
 ## 有什么用
 
 你可以：
