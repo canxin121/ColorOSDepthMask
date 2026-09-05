@@ -2,7 +2,7 @@
 
 ColorOS 16 锁屏景深壁纸增强模块。
 
-它通过 LSPosed 注入 `com.oplus.wallpapers`，允许你为不同壁纸分别管理景深蒙版：既可以直接调用 ColorOS 自带 AI 自动生成，也可以导入 PNG，并在真实壁纸底图上继续手工修整。独立 App 只负责 Root 状态、环境信息，以及快速重启壁纸进程 / SystemUI。
+它通过 LSPosed 注入 `com.oplus.wallpapers`，允许你为不同壁纸分别管理景深蒙版：既可以直接调用 ColorOS 自带 AI 自动生成，也可以导入 PNG，并在真实壁纸底图上继续手工修整。独立 App 同时提供 Root / 环境诊断、快速重载、GitHub Releases 自动更新，以及开发者 / 仓库 / Blog 等项目入口。
 
 ## 功能
 
@@ -14,8 +14,11 @@ ColorOS 16 锁屏景深壁纸增强模块。
 - 保存后的蒙版覆盖 ColorOS AI 抠图结果，AI 漏检时也可手工修正景深前景。
 - 景深开关保持手动状态，不被 ColorOS 自动勾选、取消、禁用或灰显。
 - 拖动、缩放、裁切壁纸后，手动开启的景深前景仍保持显示。
-- 独立 App 可显示 Root / 模块 / 壁纸应用 / 设备信息。
-- 独立 App 可一键重启 `com.oplus.wallpapers`，或同时重启壁纸进程与 SystemUI。
+- 独立 App 使用 Material 3 自适应导航：首页、诊断、项目分开显示，手机使用底部导航，宽屏自动切换侧栏。
+- 独立 App 可显示并一键复制模块 / Wallpapers / 设备 / ColorOS / Root / LSPosed / SELinux / Verified Boot 等诊断信息。
+- 支持基于 GitHub Releases 的自动更新：检查新版本、显示更新说明、下载 APK，并校验 SHA-256 / 包名 / versionCode / 签名后交给系统安装器。
+- 独立 App 可一键重启 `com.oplus.wallpapers` 或 SystemUI。
+- 项目页提供开发者、GitHub 仓库、Releases、Issues 和个人 Blog 的可点击入口。
 
 ## 兼容性
 
@@ -74,15 +77,17 @@ KernelSU / KernelSU Next 采用以 Root 管理器为准的白名单授权模型�
 
 ## DepthMask App
 
-App 本身保持简单，只提供：
+独立 App 按三个顶级页面组织，避免把所有信息堆成一条超长列表：
 
-- Root 授权状态
-- 模块版本
-- `com.oplus.wallpapers` 版本
-- 设备 / Android 信息
-- LSPosed 作用域信息
-- **壁纸**：重启 `com.oplus.wallpapers`
-- **SystemUI**：重启壁纸进程并重启 SystemUI
+- **首页**：当前版本、GitHub Release 更新状态、Root 状态，以及 Wallpapers / SystemUI 快速重载。
+- **诊断**：模块、目标应用、设备、ColorOS、Kernel、Root、LSPosed、SELinux、Verified Boot 等信息。详细分组默认折叠，每项可复制，并支持一键复制完整诊断。
+- **项目**：开发者、项目仓库、Releases、Issues 与个人 Blog 的独立可点击链接。
+
+### 自动更新
+
+App 启动后会检查 GitHub Releases。发现更高版本时可直接下载 APK。下载完成后会依次检查 GitHub 提供的 SHA-256（若可用）、包名、`versionCode`、`versionName` 和签名证书，全部通过后才会交给 Android 系统安装器。
+
+首次从 App 内安装更新时，Android 可能要求为 DepthMask 开启“安装未知应用”权限。
 
 ## 源码与构建
 
