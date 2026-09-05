@@ -8,15 +8,11 @@ ColorOSDepthMask 是一个用于 **ColorOS 锁屏景深壁纸** 的 LSPosed 模�
 
 <table>
   <tr>
-    <td align="center" width="33%">
+    <td align="center" width="50%">
       <a href="screenshots/lockscreen-editor.jpg"><img src="screenshots/lockscreen-editor.jpg" alt="ColorOS 锁屏编辑页中的蒙版入口" width="260"></a><br>
       <sub>锁屏编辑页：在原生「景深」旁加入「蒙版」入口</sub>
     </td>
-    <td align="center" width="33%">
-      <a href="screenshots/mask-panel.jpg"><img src="screenshots/mask-panel.jpg" alt="ColorOSDepthMask 蒙版功能面板" width="260"></a><br>
-      <sub>蒙版面板：自动生成、编辑、导入，以及替换 / 并集 / 交集 / 反转</sub>
-    </td>
-    <td align="center" width="33%">
+    <td align="center" width="50%">
       <a href="screenshots/mask-editor.jpg"><img src="screenshots/mask-editor.jpg" alt="ColorOSDepthMask 蒙版编辑器" width="260"></a><br>
       <sub>蒙版编辑器：直接在真实壁纸上使用画笔、橡皮、撤销和重做</sub>
     </td>
@@ -116,16 +112,11 @@ PNG 推荐和原始壁纸保持相同尺寸 / 比例。
 - 黑色 / 透明：背景
 - 灰色 / 半透明：过渡区域
 
-## 蒙版模式
+## 自定义蒙版行为
 
-保存蒙版后可以选择：
+从 v0.1.4 开始，只要当前壁纸存在自定义蒙版，它就会**直接替换 ColorOS 原生 AI 前景**。不再提供并集 / 交集模式，避免最终效果继续依赖一份不可控的系统 AI 蒙版。
 
-- **替换**：只使用自定义蒙版；
-- **并集**：自定义蒙版 + 系统结果；
-- **交集**：只保留两者重合部分；
-- **反转**：前景和背景互换。
-
-一般直接使用 **替换** 即可。
+仍然可以使用 **反转** 来交换当前自定义蒙版的前景和背景；删除蒙版后则恢复 ColorOS 原生行为。
 
 ## 独立 App
 

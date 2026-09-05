@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag, for example v0.1.3
+        description: Release tag, for example v0.1.4
         required: true
-        default: v0.1.3
+        default: v0.1.4
       source_ref:
         description: Private source branch, tag or commit
         required: true
