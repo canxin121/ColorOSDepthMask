@@ -13,7 +13,7 @@ ColorOSDepthMask 是一个用于 **ColorOS 锁屏景深壁纸** 的 LSPosed 模�
       <sub>锁屏编辑页：在原生「景深」旁加入「蒙版」入口</sub>
     </td>
     <td align="center" width="33%">
-      <a href="screenshots/mask-panel.jpg"><img src="screenshots/mask-panel.jpg" alt="ColorOSDepthMask v0.1.4 蒙版功能面板" width="260"></a><br>
+      <a href="screenshots/mask-panel.jpg"><img src="screenshots/mask-panel.jpg" alt="ColorOSDepthMask 蒙版功能面板" width="260"></a><br>
       <sub>蒙版面板：自动生成、编辑、导入；可反转或删除当前自定义蒙版</sub>
     </td>
     <td align="center" width="33%">
@@ -47,15 +47,15 @@ ColorOSDepthMask 是一个用于 **ColorOS 锁屏景深壁纸** 的 LSPosed 模�
 
 ## 兼容环境
 
-目前主要适配：
+当前版本已针对多代 ColorOS Wallpapers 内部结构做兼容，不再只绑定单一 16.10.x 方法名。已使用真实 APK 验证 `com.oplus.wallpapers` **15.06.0102 至 16.10.0082**，共覆盖 20 个不同构建，包括 15.08 / 15.09 / 15.10、16.02 / 16.03 / 16.04 / 16.05 的多个小版本与 SP 构建。
 
-- ColorOS 16
-- Android 16
-- `com.oplus.wallpapers` 16.10.x
-- LSPosed
-- KernelSU / KernelSU Next / Magisk / APatch 等 Root 环境
+运行环境：
 
-系统或 Wallpapers 更新后，内部实现可能变化，因此可能需要重新适配。
+- Android 15（API 35）及以上；
+- LSPosed；
+- KernelSU / KernelSU Next / Magisk / APatch 等 Root 环境。
+
+模块会根据 Wallpapers 的实际 class / method 结构选择兼容路径，而不是只判断版本号。未来系统或 Wallpapers 更新如果再次改变内部 ABI，仍可能需要继续适配。
 
 ## 安装
 
