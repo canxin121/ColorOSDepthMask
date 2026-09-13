@@ -4,13 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag, for example v0.1.8
+        description: Release tag, for example v0.1.9
         required: true
-        default: v0.1.8
+        default: v0.1.9
       source_ref:
         description: Private source branch, tag or commit
         required: true
-        default: main
+        default: v0.1.9
+      version_code:
+        description: Expected Android versionCode
+        required: true
+        default: '60'
+      apk_sha256:
+        description: Expected reproducible APK SHA-256
+        required: true
+        default: 9a749440bec3aeca8634052d62b2a4304e7170083637b7f4779df8e541dc315a
       prerelease:
         description: Mark as prerelease
         required: true
@@ -68,14 +76,15 @@ jobs:
             "platforms;android-37.0" \
             "build-tools;37.0.0"
 
-      - name: Build release APK
+      - name: Verify source and build release APK
         working-directory: source
         run: |
           set -euo pipefail
           chmod +x gradlew
           test -f signing/release.jks
           test -f signing/release.properties
-          ./gradlew :app:assembleRelease --no-daemon --stacktrace
+          python3 tests/check-system-video-v3-source.py
+          ./gradlew :app:testDebugUnitTest :app:assembleRelease :app:lintRelease --no-daemon --stacktrace
 
       - name: Validate artifact
         id: artifact
@@ -85,19 +94,50 @@ jobs:
           APK='source/app/build/outputs/apk/release/app-release.apk'
           test -f "$APK"
           test "$(unzip -p "$APK" assets/xposed_init | tr -d '\r\n')" = 'dev.coloros.depthmask.hook.DepthMaskHook'
+
           AAPT="$ANDROID_HOME/build-tools/37.0.0/aapt"
-          VERSION_NAME="$($AAPT dump badging "$APK" | sed -n "s/.*versionName='\([^']*\)'.*/\1/p" | head -n 1)"
+          APKSIGNER="$ANDROID_HOME/build-tools/37.0.0/apksigner"
+          BADGING="$($AAPT dump badging "$APK" | head -n 1)"
+          VERSION_NAME="$(printf '%s\n' "$BADGING" | sed -n "s/.*versionName='\([^']*\)'.*/\1/p")"
+          VERSION_CODE="$(printf '%s\n' "$BADGING" | sed -n "s/.*versionCode='\([^']*\)'.*/\1/p")"
           EXPECTED_VERSION="${{ inputs.tag }}"
           EXPECTED_VERSION="${EXPECTED_VERSION#v}"
           test -n "$VERSION_NAME"
+          test -n "$VERSION_CODE"
           if [ "$VERSION_NAME" != "$EXPECTED_VERSION" ]; then
             echo "::error::APK versionName $VERSION_NAME does not match release tag ${{ inputs.tag }}"
             exit 1
           fi
+          if [ "$VERSION_CODE" != "${{ inputs.version_code }}" ]; then
+            echo "::error::APK versionCode $VERSION_CODE does not match expected ${{ inputs.version_code }}"
+            exit 1
+          fi
+
+          EXPECTED_CERT='b389cf6e91508e445a0be2e28b981cf0a78b9e3531b40bc017ab28b87f4752ef'
+          ACTUAL_CERT="$($APKSIGNER verify --print-certs "$APK" | sed -n 's/.*certificate SHA-256 digest: //p' | head -n 1)"
+          if [ "$ACTUAL_CERT" != "$EXPECTED_CERT" ]; then
+            echo "::error::Unexpected APK signer certificate: $ACTUAL_CERT"
+            exit 1
+          fi
+
+          if unzip -Z1 "$APK" | grep -qx 'META-INF/version-control-info.textproto'; then
+            echo "::error::Release APK unexpectedly contains Git VCS metadata; reproducible SHA would depend on source commit."
+            exit 1
+          fi
+
+          ACTUAL_SHA="$(sha256sum "$APK" | awk '{print $1}')"
+          if [ "$ACTUAL_SHA" != "${{ inputs.apk_sha256 }}" ]; then
+            echo "::error::APK SHA-256 $ACTUAL_SHA does not match the fully audited release ${{ inputs.apk_sha256 }}"
+            exit 1
+          fi
+
           NAME="ColorOSDepthMask-${{ inputs.tag }}.apk"
           cp "$APK" "$NAME"
-          sha256sum "$NAME"
+          echo "APK: $NAME"
+          echo "SHA-256: $ACTUAL_SHA"
+          echo "Source: ${{ inputs.source_ref }} ($(git -C source rev-parse HEAD))"
           echo "apk=$NAME" >> "$GITHUB_OUTPUT"
+          echo "sha256=$ACTUAL_SHA" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -105,5 +145,6 @@ jobs:
           tag_name: ${{ inputs.tag }}
           name: ColorOSDepthMask ${{ inputs.tag }}
           prerelease: ${{ inputs.prerelease }}
-          generate_release_notes: true
+          generate_release_notes: false
+          body_path: docs/release-${{ inputs.tag }}.md
           files: ${{ steps.artifact.outputs.apk }}
