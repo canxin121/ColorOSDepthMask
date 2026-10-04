@@ -4,21 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag, for example v0.1.9
+        description: Release tag, for example v0.1.10
         required: true
-        default: v0.1.9
+        default: v0.1.10
       source_ref:
         description: Private source branch, tag or commit
         required: true
-        default: v0.1.9
+        default: v0.1.10
       version_code:
         description: Expected Android versionCode
         required: true
-        default: '60'
+        default: '61'
       apk_sha256:
         description: Expected reproducible APK SHA-256
         required: true
-        default: 9a749440bec3aeca8634052d62b2a4304e7170083637b7f4779df8e541dc315a
+        default: 3ca81065c4c95c78111e2d022fdf4a03ecd78a534fbf27e20ef81337ecc20cc1
       prerelease:
         description: Mark as prerelease
         required: true
@@ -84,6 +84,7 @@ jobs:
           test -f signing/release.jks
           test -f signing/release.properties
           python3 tests/check-system-video-v3-source.py
+          python3 tests/check-compatibility-boundary.py
           ./gradlew :app:testDebugUnitTest :app:assembleRelease :app:lintRelease --no-daemon --stacktrace
 
       - name: Validate artifact
