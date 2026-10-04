@@ -19,6 +19,9 @@
 同一布局下，新版发布包的布局实现通过图标、标题、间距、点击及原生节点保护检查。
 完整验证范围及逐项结果见 [v0.1.11 兼容性验证](https://github.com/canxin121/ColorOSDepthMask/blob/main/docs/compatibility-v0.1.11.md)。
 
+[云端发布构建](https://github.com/canxin121/ColorOSDepthMask/actions/runs/37207988146) 已通过单测、构建、lint 和发布校验；
+下载产物后确认与本地完整回归的签名 APK 逐字节一致。
+
 这次反馈来自外部测试者的一加 15 国行 PLK110。当前没有该手机的 LSPosed 日志，
 因此报告缺失的真机原因尚不能确定，也尚未完成该设备的新版 UI/GPU 验收。
 自动测试使用真实 APK 和隔离 Android 进程；厂商控件绘制和真实 LSPosed 引擎仍需对应设备复测。

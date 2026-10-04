@@ -11,8 +11,11 @@
 - 签名证书 SHA-256：`b389cf6e91508e445a0be2e28b981cf0a78b9e3531b40bc017ab28b87f4752ef`
 - APK Signature Scheme v2：通过
 - 对应 private source tag：`v0.1.11`
+- [GitHub Actions 发布构建](https://github.com/canxin121/ColorOSDepthMask/actions/runs/37207988146)：单测、构建、lint、版本/签名/哈希校验全部通过。
 
 构建继续关闭非运行时的 Git VCS 信息和随机加密依赖元数据，沿用原有签名证书。
+云端构建使用源码提交 `88d09016db47c74c6a047dec66d913e564b53f3b`；下载云端产物后，
+已确认与本地完整回归包逐字节相同，并再次检查版本号和 APK v2 签名。
 
 本版针对外部测试者报告的一加 15 / ColorOS 17 入口缺失进行修复。旧版已通过方法签名和模拟 Hook
 测试，但遗漏了 17.x 工具栏布局变化。本次直接调用已发布 v0.1.10 APK 的实际 R8 工具栏工厂，
