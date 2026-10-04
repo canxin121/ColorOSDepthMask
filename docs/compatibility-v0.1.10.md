@@ -6,12 +6,12 @@
 
 - 应用 ID：`dev.coloros.depthmask`
 - APK：`ColorOSDepthMask-v0.1.10.apk`
-- APK 大小：`3147576` bytes
-- APK SHA-256：`3ca81065c4c95c78111e2d022fdf4a03ecd78a534fbf27e20ef81337ecc20cc1`
+- APK 大小：`3143480` bytes
+- APK SHA-256：`8f8750809fdb4597515b0894d087e386ada5aa2c67856a0f62a8d0f7724d238e`
 - 签名证书 SHA-256：`b389cf6e91508e445a0be2e28b981cf0a78b9e3531b40bc017ab28b87f4752ef`
 - APK Signature Scheme v2：通过
 - 对应 private source tag：`v0.1.10`
-- 对应 private source commit：`7612a045b936e2cbfff21ef614cfb6ef9f9bc0ea`
+- 对应 private source commit：`3b3040c80c6989a01afff4c73d9bafeb5cc3834c`
 
 ## 本版覆盖范围
 

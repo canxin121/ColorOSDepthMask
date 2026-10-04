@@ -18,9 +18,14 @@ on:
       apk_sha256:
         description: Expected reproducible APK SHA-256
         required: true
-        default: 3ca81065c4c95c78111e2d022fdf4a03ecd78a534fbf27e20ef81337ecc20cc1
+        default: 8f8750809fdb4597515b0894d087e386ada5aa2c67856a0f62a8d0f7724d238e
       prerelease:
         description: Mark as prerelease
+        required: true
+        type: boolean
+        default: false
+      draft:
+        description: Keep release unpublished for final artifact verification
         required: true
         type: boolean
         default: false
@@ -157,6 +162,7 @@ jobs:
           tag_name: ${{ inputs.tag }}
           name: ColorOSDepthMask ${{ inputs.tag }}
           prerelease: ${{ inputs.prerelease }}
+          draft: ${{ inputs.draft }}
           generate_release_notes: false
           body_path: docs/release-${{ inputs.tag }}.md
           files: ${{ steps.artifact.outputs.apk }}

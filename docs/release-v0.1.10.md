@@ -28,7 +28,7 @@
 - APK：`ColorOSDepthMask-v0.1.10.apk`
 - 应用 ID：`dev.coloros.depthmask`
 - versionCode：`61`
-- SHA-256：`3ca81065c4c95c78111e2d022fdf4a03ecd78a534fbf27e20ef81337ecc20cc1`
+- SHA-256：`8f8750809fdb4597515b0894d087e386ada5aa2c67856a0f62a8d0f7724d238e`
 - 签名证书 SHA-256：`b389cf6e91508e445a0be2e28b981cf0a78b9e3531b40bc017ab28b87f4752ef`
 
 与之前正式版使用同一签名证书，可直接覆盖安装。更新后在 LSPosed 中保持作用域为 `com.oplus.wallpapers`，再到模块首页点击 **重载壁纸**。打开一次壁纸编辑页后，可回到诊断页刷新兼容检查结果。
