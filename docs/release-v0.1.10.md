@@ -21,6 +21,9 @@
 - 故障注入：关键类缺失、核心安装失败、撤销失败、视频安装失败、3D 安装失败共 5 种场景通过。
 - JVM / Robolectric：187 项，0 失败、0 错误，1 项可选性能基准跳过；Android lint 无 Error / Fatal。
 
+发布包同时通过 [Linux CI 的可复现构建校验](https://github.com/canxin121/ColorOSDepthMask/actions/runs/37192427365)，
+云端附件与本地完整矩阵使用的签名 APK 逐字节一致。
+
 完整能力表与测试边界见 [v0.1.10 兼容性验证](https://github.com/canxin121/ColorOSDepthMask/blob/v0.1.10/docs/compatibility-v0.1.10.md)。这些测试使用真实厂商 APK，在 AOSP 模拟器中隔离加载；Hook 装配使用记录式 Xposed 测试实现。对应 ColorOS / 一加真机的完整界面、GPU、系统服务和云端抠图仍需实际验收，未来版本也可能需要新增适配。
 
 ## 安装包校验

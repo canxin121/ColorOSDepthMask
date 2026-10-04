@@ -11,7 +11,11 @@
 - 签名证书 SHA-256：`b389cf6e91508e445a0be2e28b981cf0a78b9e3531b40bc017ab28b87f4752ef`
 - APK Signature Scheme v2：通过
 - 对应 private source tag：`v0.1.10`
-- 对应 private source commit：`3b3040c80c6989a01afff4c73d9bafeb5cc3834c`
+- APK 构建提交（private source）：`3b3040c80c6989a01afff4c73d9bafeb5cc3834c`
+
+该包已在 [Linux CI](https://github.com/canxin121/ColorOSDepthMask/actions/runs/37192427365) 复现构建，
+通过版本、签名和 SHA-256 校验。下载 CI 附件后与本地完整兼容矩阵使用的 APK 逐字节一致。
+构建关闭非运行时的 Git VCS 信息和随机加密依赖元数据，保持正式包可复现。
 
 ## 本版覆盖范围
 
