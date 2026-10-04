@@ -11,7 +11,7 @@
 - 签名证书 SHA-256：`b389cf6e91508e445a0be2e28b981cf0a78b9e3531b40bc017ab28b87f4752ef`
 - APK Signature Scheme v2：通过
 - 对应 private source tag：`v0.1.10`
-- 对应 private source commit：`436b3ab1c1aedd289b04a3aa84e1649fc26cbb64`
+- 对应 private source commit：`7612a045b936e2cbfff21ef614cfb6ef9f9bc0ea`
 
 ## 本版覆盖范围
 
