@@ -4,21 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag, for example v0.1.11
+        description: Release tag, for example v0.1.12
         required: true
-        default: v0.1.11
+        default: v0.1.12
       source_ref:
         description: Private source branch, tag or commit
         required: true
-        default: v0.1.11
+        default: v0.1.12
       version_code:
         description: Expected Android versionCode
         required: true
-        default: '62'
+        default: '65'
       apk_sha256:
         description: Expected reproducible APK SHA-256
         required: true
-        default: c7bceee57bcd12515fcc2a6d3f970763d98e183ad8f84f996e451f25f68a82ae
+        default: 7ae53af6ceeaa50791d876c09cace9f28e7370680c2a4329c114a9c3829c7147
       prerelease:
         description: Mark as prerelease
         required: true
