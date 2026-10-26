@@ -9,6 +9,7 @@
 - SHA-256：`7ae53af6ceeaa50791d876c09cace9f28e7370680c2a4329c114a9c3829c7147`
 - 签名证书 SHA-256：`b389cf6e91508e445a0be2e28b981cf0a78b9e3531b40bc017ab28b87f4752ef`
 - 沿用现有正式签名，可覆盖安装。
+- [云端构建 40375505545](https://github.com/canxin121/ColorOSDepthMask/actions/runs/40375505545) 已成功：从固定源码 tag 构建，核验版本、证书与 SHA-256；下载产物与本地完成矩阵验证的 APK 逐字节一致，之后正式发布为 latest。
 
 ## 本版修复与设备复测
 
