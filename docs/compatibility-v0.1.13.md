@@ -10,6 +10,7 @@
 - 签名证书 SHA-256：`b389cf6e91508e445a0be2e28b981cf0a78b9e3531b40bc017ab28b87f4752ef`
 - 包名：`dev.coloros.depthmask`，沿用现有正式签名，可覆盖安装。
 - 发布流程使用 public 仓库的 GitHub Actions，从固定私有源码构建，并校验版本、证书与上述已验证 APK 的 SHA-256。
+- [云端构建 40620630107](https://github.com/canxin121/ColorOSDepthMask/actions/runs/40620630107) 已成功完成测试、Release / R8、lint 和产物校验，并发布为最新正式版。未登录请求的更新接口已返回 `v0.1.13`；从公开下载地址取得的 APK 与本地完成矩阵验证的 APK 逐字节一致，下载后再次核对版本、包名、Xposed 入口和签名均通过。
 
 ## 本版功能与状态
 
